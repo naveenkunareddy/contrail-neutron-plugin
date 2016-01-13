@@ -1,4 +1,4 @@
-neutron-plugin-contrail (2.1) trusty; urgency=low
+neutron-plugin-contrail (2.11) trusty; urgency=low
 
   * Initial release.
 
