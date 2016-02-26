@@ -47,9 +47,7 @@ class QuotaDriver(object):
             };
 
     def vnc_project_id(self, project_id):
-
         project_id = project_id + 'ffffffffffffffffffff'
-
         return project_id
 
     @classmethod
