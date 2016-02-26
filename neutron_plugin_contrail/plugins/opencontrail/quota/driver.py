@@ -46,6 +46,12 @@ class QuotaDriver(object):
             'health_monitor': 'loadbalancer_healthmonitor'
             };
 
+    def vnc_project_id(self, project_id):
+
+        project_id = project_id + 'ffffffffffffffffffff'
+
+        return project_id
+
     @classmethod
     def _get_vnc_conn(cls):
         global vnc_conn
@@ -106,6 +112,8 @@ class QuotaDriver(object):
     @classmethod
     def _get_tenant_quotas(cls, context, resources, tenant_id, default_quota):
         try:
+            if 12 == len(tenant_id):
+                tenant_id = self.vnc_project_id(tenant_id)
             proj_id = str(uuid.UUID(tenant_id))
             proj_obj = cls._get_vnc_conn().project_read(id=proj_id)
             quota = proj_obj.get_quota()
@@ -153,6 +161,8 @@ class QuotaDriver(object):
     @classmethod
     def delete_tenant_quota(cls, context, tenant_id):
         try:
+            if 12 == len(tenant_id):
+                tenant_id = self.vnc_project_id(tenant_id)
             proj_id = str(uuid.UUID(tenant_id))
             proj_obj = cls._get_vnc_conn().project_read(id=proj_id)
             quota = proj_obj.get_quota()
@@ -171,6 +181,8 @@ class QuotaDriver(object):
     @classmethod
     def update_quota_limit(cls, context, tenant_id, resource, limit):
         try:
+            if 12 == len(tenant_id):
+                tenant_id = self.vnc_project_id(tenant_id)
             proj_id = str(uuid.UUID(tenant_id))
             proj_obj = cls._get_vnc_conn().project_read(id=proj_id)
             quota = proj_obj.get_quota() or vnc_api.QuotaType()
